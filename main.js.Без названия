@@ -1,0 +1,144 @@
+window.card_images_check = function(t) {
+	if(t.hasClass('card__list-button_active')) return false;
+		
+	var id = t.attr('data-id');
+	console.log(id);
+	t.closest('.card').find('.js-main-photo').hide();
+	t.closest('.card').find('.card__list-button_active').removeClass('card__list-button_active');
+	t.addClass('card__list-button_active');
+	var p = t.closest('.card').find('.js-main-photo[data-id="' + id + '"]');
+	p.fadeIn(500);
+	
+}
+$(function(){
+	$('body').on('click', '[href*="tel"]', function(){
+		(typeof metrikaSend == 'function' && metrikaSend('phone'));
+	});
+	$('body').on('click', '[href*="mailto"]', function(){
+		(typeof metrikaSend == 'function' && metrikaSend('email'));
+	});
+	$('body').on('click', '.js-card-images button', function(){
+		window.card_images_check($(this));
+	}).on('click', '.about__more', function(){
+		$(this).parent().find('.about__nomobile').toggle();
+		$(this).remove();
+	}).on('submit', '.js-order-form', function(){
+		var f = $(this);
+		var fz = f.find('input[name="privacy"]');
+		
+		if(fz.length > 0 && !fz.prop('checked')){
+			fz.parent().css('color','red');
+			setTimeout(function(){
+				fz.parent().removeAttr('style');				
+			},1500);
+			return false;
+		}
+		var data = new FormData(this);
+		
+		var name = f.find('input[name="name"]').val();
+		if(typeof name == 'undefined'){
+			name = '';
+		} else {
+			name = name.trim();
+			if(name == ''){
+				f.find('input[name="name"]').focus();
+				return false;
+			}
+		}
+		var tel = f.find('input[name="phone"]').val().trim();
+		
+		if(tel == ''){
+			f.find('input[name="phone"]').focus();
+			return false;
+		}
+		if(f.prop('send')) return false;
+		f.prop('send', true);
+		var title = f.find('input[name=title]').val();
+		if(typeof title == 'undefined'){
+			title = f.closest('.popup').find('.popup__title').text();
+			if(typeof title == 'undefined'){
+				title = "Заказ звонка";
+			}
+		}
+		
+		data.append('title', title);
+		data.append('ajax', 1);
+		$.ajax({
+			url: "/ajax/mail.php",
+			type: "POST",
+			data: data,
+			cache: !1,
+			contentType: !1,
+			processData: !1
+		}).done(function (e) {
+			f.html('<p>Ваш запрос принят, в ближайшее время с Вами свяжется наш специалист.</p>');
+			/*setTimeout(function() { $('body').find('.popup__close, .fancybox-close-small').click(); }, 1500);*/
+			f.prop('send', false);
+			(typeof metrikaSend == 'function' && metrikaSend('order'));
+			
+		}).fail(function (err) {
+			
+			f.prop('send', false);
+		});
+		return false;
+	}).on('click', '.js-scoreup, .js-scoredown', function(){
+		var th = $(this);
+		var rate = th.hasClass('js-scoredown') ? -1 : 1;
+		var id = th.closest('[data-id]').attr('data-id');
+		
+		$.post('/ajax/rating.php', {id: id, rate: rate}).done(function(data){
+			var v = $('body').find('.js-video-itm[data-id="' + data.id + '"]');
+			v.find('.js-scoreup .score__button-text').text(data.l);
+			v.find('.js-scoredown .score__button-text').text(data.d);
+			v = $('body').find('.js-video[data-id="' + data.id + '"]');
+			console.log(v);
+			v.attr('data-up', data.l);
+			v.attr('data-down', data.d);
+			v.data('up', data.l);
+			v.data('down', data.d);
+		});
+		
+	}).on('click', '.video__link, .video-link', function(){
+		var th = $(this);
+		if(th.attr('data-fancybox')) return true;
+		var url = $(this).attr('href');
+		
+			var w = th.width();
+			var h = th.height();
+			console.log(w,h, url);
+		if(typeof url == 'undefined' || url == '') return false;
+		
+		try{ 
+			var h = th.height();
+			console.log(w,h, url);
+			url = url.replace("https://youtu.be/", "https://www.youtube.com/embed/") + (url.indexOf('?') > 0 ? '&' : '?') + 'autoplay=1';
+			th[0].outerHTML = '<iframe width="' + w + '" height="' + h +'" src="' + url + '" autoplay=true frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+
+
+		} catch(er){
+			console.log(er)
+		}
+		return false;
+	});
+});
+window.click_video = function(t){
+	console.log('click_video');
+}
+window.click_current_video = function(t){
+	console.log('click_current_video');
+	
+}
+window.click_js_video_link = function(t){
+	console.log('click_js_video_link');
+	
+}
+function findVideos(th){
+	$(th).find('a').click();
+	setTimeout(function(){
+		var v = $('body').find('.video-item_active');
+		if(v.length > 0){
+			var id = v.attr("data-id");
+			$(th).closest('.js-source').attr('data-id',id);
+		}
+	},100);
+}

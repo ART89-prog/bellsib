@@ -1,0 +1,213 @@
+.fancybox-button--close {
+    background: #e6a313 !important;
+	width: 40px;
+    height: 40px;
+}
+.fancybox-button--close svg {
+    width: 20px;
+    height: 20px;
+}
+.popup_callback .heading_popup {
+    max-width: 280px;
+}
+.form_question {
+	display:flex;
+}
+@media (min-width:992px){
+	.accordion__row {
+		flex-wrap:wrap;
+	}
+}
+.characteristics__accordion ul {
+	list-style-type: none;
+}
+.characteristics__accordion ul li:before {
+    content: "-";
+    display: inline-block;
+    margin-right: 5px;
+}
+.fancybox-navigation .fancybox-button svg {
+	width: 25px;
+	height:25px;
+}
+.abuot_cert {
+    display: block;
+    padding-bottom: 20px;
+	text-align: left;
+}
+.abuot_cert img {
+    max-width: 100%;
+    border: 3px solid #f90;
+    display: block;
+    margin-bottom: 20px;
+}
+.abuot_cert span {
+    font-weight: bold;
+}
+.abuot_cert.in_mobile {
+	display:none;
+}
+.album_photos__list {
+	display:flex;
+    flex-wrap: wrap;
+}
+.album_photos__list .photo__item {
+	width: 33%;
+	padding-right: 10px;
+	margin-bottom: 20px;
+}
+a.photo__wrap {
+	display: inline-block;
+	width: 100%;
+	height: 350px;
+	overflow: hidden;
+	position:relative;
+}
+
+a.photo__wrap.news_item {
+	height:250px;
+}
+a.photo__wrap img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: auto;
+    height: 100%;
+}
+.album-item-video a:after {
+	content:"";
+	position:absolute;
+	width:50px;
+	height:50px;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity:0.5;
+	z-index:1;
+	background: url(../images/youtube.png) no-repeat 100% center;
+}
+.album-item-video:hover a:after {
+	opacity:0.8;
+}
+.header__social .contacts__email a:not(:first-child){
+	display:block;
+	margin-top:10px;
+}
+.contacts_header {
+	position:relative;
+}
+.contacts_header .header_emails {
+	position:absolute;
+	text-align:right;
+	margin-top:10px;
+	font-weight: 300;
+	right:0px;
+}
+.contacts_menu .header_emails {
+	margin-top:20px;
+	font-weight: 300;
+}
+@media (max-width: 768px) {
+	
+	.contacts_header .header_emails, .header__social .contacts__email {
+		display:none;
+	}
+	.album_photos__list .photo__item {
+		width: 50%;
+	}
+		
+	a.photo__wrap {
+		height: 150px;
+	}
+	.grid_faq .offer__item-list {
+		padding-left:20px;
+		max-width: 90%;
+	}
+	a.photo__wrap.news_item {
+		height:80px;
+	}
+	.abuot_cert.in_mobile {
+		display:flex;
+		margin-top:40px;
+	}
+	.abuot_cert.in_desktop {
+		display:none;
+	}
+	.abuot_cert {
+		display: flex;
+		align-items: center;
+	}
+	.abuot_cert span {
+		padding-left: 20px;
+		min-width: 70%;
+	}
+	.image__img {
+		min-height:320px
+	}
+	.header__logo {
+		top: 32px;
+	}
+	.hero__title-line_2, .hero__title-line_3 {
+		font-size:2.7rem;
+	}
+	.phone_header .phone__callback {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
+@media (min-width: 992px) {
+	
+	.about__media .about__submit {
+		margin-left: 80px
+	}
+	.header__bottom .header__logo {
+		margin-top:17px;
+	}
+	.about__text p {
+		font-size: 11pt;
+	}
+	.section__promo_main {
+		-ms-flex: 0 0 44%;
+		flex: 0 0 44%;
+	}
+	.hero_inner:after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		background-image: url(/assets/images/common/rock2.png);
+		background-position: bottom;
+		min-height: 296px;
+		width: 100%;
+		bottom: 0px;
+		left: 0px;
+	}
+	.section_promo2 {
+		background:none;
+	}
+	.about__text {
+		max-width: none;
+	}
+	.abuot_cert {
+		float: right;
+		display: block;
+		padding: 0px 0px 15px 65px;
+		max-width: 220px;
+	}
+	.abuot_cert img {
+		width: 100%;
+	}
+	.about__media {
+		padding-top: 125px;
+	}
+	
+}
+
+@media (min-width: 992px) {
+	.about__media {
+		flex: 0 0 680px;
+	}
+	.section_about .section__container {
+		padding-right:0px;
+	}
+}
